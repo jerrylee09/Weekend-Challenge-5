@@ -1,0 +1,16 @@
+<h1>Weekend Challenge #5</h1>
+    <form >
+        <label for="rand-animal">Animal List Ang</label>
+        <select id="rand-animal" ng-options="item as item.breed for item in items track by item.value" ng-model="selectedAnimal" ng-change="getAnimal(selectedAnimal)">
+        </select>
+    </form>
+<div class="container" >
+  <div class="col-md-6">
+  	<button ng-click="addToFavorite()">Favorite</button>
+  </div>
+  <div class="col-md-6">
+    <h2>{{animal.name.$t}}</h2>
+    <p>{{animal.description.$t}}</p>
+    <img ng-src="{{animal.media.photos.photo[2].$t}}" />
+  </div>
+</div>
