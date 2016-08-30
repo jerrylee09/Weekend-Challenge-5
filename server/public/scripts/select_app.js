@@ -37,14 +37,25 @@ myApp.controller("homeController", ["$scope", "$http", function($scope, $http) {
 
   function addToFavorite() {
     console.log($scope.animal);
-    // var animalImage = $scope.animal.media.photos.photo[2].$t;
+    var animalImage = $scope.animal.media.photos.photo[2].$t;
     var favoriteAnimal = {
       id: $scope.animal.id.$t,
       name: $scope.animal.name.$t,
-      // image: animalImage,
+      image: animalImage,
       description: $scope.animal.description.$t
     };
-    // console.log('animal image',  animalImage);
+
+    if($scope.animal.description.$t) {
+      favoriteAnimal.description = $scope.animal.description.$t.substring(0, 99);
+    }
+
+    var photos = $scope.animal.media.photos;
+    console.log('photos: ', photos);
+    if(photos != undefined) {
+      animalImage.image = photos.photo[2].$t;
+    }
+
+    console.log('animal image', $scope.animal.name.$t);
     console.log(favoriteAnimal);
     $http.post('/favorite', favoriteAnimal)
     .then(function(response) {
